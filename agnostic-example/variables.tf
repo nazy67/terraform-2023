@@ -1,4 +1,4 @@
-### Digital Ocean
+### Digital Ocean ###
 variable "region_for_droplet" {
   type = string
   default = "nyc1"
@@ -16,7 +16,7 @@ variable "env" {
 
 variable "do_token" {}
 
-### AWS 
+### AWS ###
 variable "aws_secret_key"{
 default = ""
 }
@@ -25,4 +25,4 @@ variable "aws_access_key"{
 default = ""
 }
 
-### GCP
+### GCP ###
