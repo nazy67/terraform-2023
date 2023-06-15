@@ -1,6 +1,6 @@
 resource "google_compute_instance" "vm" {
-  provider     = google-beta
-  name         = "my-vm"
+  provider     = google.gcp
+  name         = "terraform-instance"
   machine_type = "e2-medium"
 
   boot_disk {
@@ -12,10 +12,4 @@ resource "google_compute_instance" "vm" {
   network_interface {
     network = "default"
   }
-}
-
-resource "google_compute_machine_image" "image" {
-  provider        = google-beta
-  name            = "my-image"
-  source_instance = google_compute_instance.vm.self_link
 }

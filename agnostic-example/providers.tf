@@ -2,45 +2,28 @@
 terraform {
   required_providers {
     digitalocean = {
-      source = "digitalocean/digitalocean"
+      source  = "digitalocean/digitalocean"
       version = "2.28.1"
     }
   }
 }
 
 provider "digitalocean" {
+  alias = "do"
   token = var.do_token
 }
 
 ### AWS ###
-terraform {
- required_version = "~>1.4.6"
- required_providers {
-  aws = {
-   source = "hashicorp/aws"
-   version = "~>4.0.0"
-  }
- }
-}
-
 provider "aws" {
- region = "us-east-1"
- access_key=var.aws_access_key
- secret_key=var.aws_secret_key
+  alias      = "amazon"
+  region     = "us-east-1"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 ### GCP ###
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "4.67.0"
-    }
-  }
-}
-
 provider "google" {
-  project     = "my-project-id"
-  region      = "us-central1"
-  zone        = "us-central1-a"
+  alias       = "gcp"
+  credentials = "key.json"
+  project     = "terraform-2023"
 }
