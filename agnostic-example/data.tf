@@ -5,5 +5,5 @@ data "digitalocean_image" "ubuntu_image" {
 
 data "digitalocean_ssh_key" "ssh-key" {
   provider = digitalocean.do
-  name     = "nazy-local-key"
+  name     = "key_name"
 }
