@@ -5,6 +5,14 @@ terraform {
       source  = "digitalocean/digitalocean"
       version = "2.28.1"
     }
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.4.0"
+    }
+    google = {
+      source = "hashicorp/google"
+      version = "4.69.1"
+    }
   }
 }
 
@@ -25,5 +33,7 @@ provider "aws" {
 provider "google" {
   alias       = "gcp"
   credentials = "key.json"
+  region      = "us-central1"
+  zone        = "us-central1-a"
   project     = "terraform-2023"
 }
