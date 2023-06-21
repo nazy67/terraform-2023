@@ -1,40 +1,34 @@
-resource "aws_instance" "first_ec2" {
-  ami           = "ami-0affd4508a5d2481b" #change to image id from your aws account
-  instance_type = "t2.micro"
-  tags = {
-    Name        = "terraform-vm"
-    owner       = "nazy.khalilova@gmail.com" # change email to your own
-    Environment = "Dev"
-    ManagedBy   = "terraform"
-    Git_url     = "https://github.com/nazy67/terraform/tree/main/aws_data_ami_ec2_sg" # change github link to your own
-  }
+resource "aws_instance" "my-webserver" {
+    ami       = "ami-07dfed28fcf95241c"
+    instance_type = "t2.micro"
+    key_name = "new-name"
+    vpc_security_group_ids = [aws_security_group.ssh-port.id]
+    tags = {
+      Name  = "webserver"
+    }
 }
 
-# resource "aws_instance" "my_instance" {
-#   ami                    = data.aws_ami.amazon_linux2.image_id
-#   instance_type          = var.instance_type
-#   key_name               = var.key_name
-#   tags                   = local.common_tags
-# }
+resource "aws_security_group" "ssh-port" {
+    name = "webserver-security-group-ssh"
+    description = "this sg allowes port 22"
+    vpc_id = "vpc-e505479d"
 
-# locals {
-#   common_tags = {
-#     Name        = "terraform-vm"
-#     owner       = "nazy.khalilova@gmail.com"
-#     Environment = "Dev"
-#     ManagedBy   = "terraform"
-#   }
-# }
+   ingress = {
+    description = "allows port 22"
+    from_port = 22
+    to_port   = 22
+    protocol = "tcp"
+    cidr_blocks = ["98.227.136.153/32"]
+   }
 
-# resource "aws_instance" "first_ec2" {
-#   ami           = "ami-0affd4508a5d2481b" #change to image id from your aws account
-#   instance_type = "t2.micro"
-#   user_data     = file("${path.module}/user-data.sh")
-#   tags = {
-#     Name        = "terraform-vm"
-#     owner       = "nazy.khalilova@gmail.com" # change email to your own
-#     Environment = "Dev"
-#     ManagedBy   = "terraform"
-#     Git_url     = "https://github.com/nazy67/terraform/tree/main/aws_data_ami_ec2_sg" # change github link to your own
-#   }
-# }
+   egress = {
+    from_port = 0
+    to_port    = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+   }
+
+  tags = {
+    Name = "allow_22_443"
+  }
+}
