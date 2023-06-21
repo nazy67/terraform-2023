@@ -1,5 +1,5 @@
 resource "aws_instance" "my-webserver" {
-    ami       = "ami-07dfed28fcf95241c"
+    ami       = "ami-0affd4508a5d2481b"
     instance_type = "t2.micro"
     key_name = "new-name"
     vpc_security_group_ids = [aws_security_group.ssh-port.id]
