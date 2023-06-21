@@ -15,12 +15,3 @@ output "amazon_web_public_ip" {
 output "amazon_web_private_ip" {
   value = aws_instance.ec2.private_ip
 }
-
-### GCP ###
-output "vm_id" {
-  value = google_compute_instance.vm.id
-}
-
-output "vm_instance_id" {
-  value = google_compute_instance.vm.instance_id
-}
