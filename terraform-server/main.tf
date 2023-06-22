@@ -2,6 +2,7 @@ resource "aws_instance" "terraform-instance" {
   ami                  = data.aws_ami.amazon_linux2.image_id
   instance_type        = var.instance_type
   key_name             = var.key_name
+  user_data            = file("user_data.sh")
   iam_instance_profile = aws_iam_instance_profile.terraform-instance-profile.name
   tags = {
     Name        = "${var.env}-terraform-server"
