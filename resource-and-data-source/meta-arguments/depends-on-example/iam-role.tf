@@ -16,7 +16,7 @@ resource "aws_iam_policy" "terraform-policy" {
   name        = "terraform-policy"
   path        = "/"
   description = "My terraform-policy"
-  policy      = templatefile("policy/terraform.json",{})
+  policy      = templatefile("policy/terraform.json", {})
   tags = {
     Name = "terraform-policy"
   }
