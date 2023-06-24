@@ -1,34 +1,37 @@
 resource "aws_instance" "my-webserver" {
-    ami       = "ami-0affd4508a5d2481b"
-    instance_type = "t2.micro"
-    key_name = "new-name"
-    vpc_security_group_ids = [aws_security_group.ssh-port.id]
-    tags = {
-      Name  = "webserver"
+  ami                    = data.aws_ami.amazon_linux2.image_id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  user_data              = file("template_file/user_data.sh")
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "webserver-${var.env}"
     }
+  )
 }
 
-resource "aws_security_group" "ssh-port" {
-    name = "webserver-security-group-ssh"
-    description = "this sg allowes port 22"
-    vpc_id = "vpc-e505479d"
+resource "aws_security_group" "web-sg" {
+  name        = "webserver-sg-${var.env}"
+  description = "this sg allowes port 22"
 
-   ingress = {
-    description = "allows port 22"
-    from_port = 22
-    to_port   = 22
-    protocol = "tcp"
-    cidr_blocks = ["98.227.136.153/32"]
-   }
-
-   egress = {
-    from_port = 0
-    to_port    = 0
-    protocol = "-1"
+  ingress {
+    description = "allows port"
+    from_port   = var.ssh_from_port
+    to_port     = var.ssh_to_port
+    protocol    = var.protocol
     cidr_blocks = ["0.0.0.0/0"]
-   }
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags = {
-    Name = "allow_22_443"
+    Name = "web-sg"
   }
 }
