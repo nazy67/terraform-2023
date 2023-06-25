@@ -4,12 +4,6 @@ variable "instance_type" {
   description = "instance type"
 }
 
-# variable "image_id" {
-#   type        = string
-#   default     = "ami-0affd4508a5d2481b"
-#   description = "imange id"
-# }
-
 variable "env" {
   type        = string
   default     = "dev"
@@ -18,6 +12,6 @@ variable "env" {
 
 variable "key_name" {
   type        = string
-  default     = "nazy-local-key"
+  default     = "local-key"
   description = "key name"
 }
