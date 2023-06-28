@@ -1,0 +1,15 @@
+// {
+//     "Version": "2012-10-17",
+//     "Id": "KmsKeyPolicyForS3BucketEncryption",
+//     "Statement": [
+//       {
+//         "Action": "kms:*",
+//         "Effect":"Allow",
+//         "Principal": {
+//             "AWS": "arn:aws:iam::598014893957:root"
+//         },
+//         "Resource":"*",
+//         "Sid": "Enable IAM User Permissions"
+//       }
+//     ] 
+// }
