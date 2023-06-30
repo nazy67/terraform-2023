@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "akumo-remote-state" {
   tags = merge(
     local.common_tags,
     {
-      Name = "akumo-${var.env}terraform-state-${random_pet.s3_name.id}"
+      Name = "akumo-${var.env}-terraform-state-${random_pet.s3_name.id}"
     }
   )
 }
@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "akumo-remote-state" {
 resource "random_pet" "s3_name" {
   length    = 2
   separator = "-"
-  prefix    = "akumo"
+  # prefix    = "akumo"
 }
 
 resource "aws_s3_bucket_versioning" "remote-state-versioning" {
