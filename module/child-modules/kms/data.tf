@@ -1,4 +1,6 @@
-data "aws_iam_policy_document" "s3-kms-key" {
+data "aws_caller_identity" "current" {}
+
+data "aws_iam_policy_document" "s3-kms-key-policy-for-encryption" {
   statement {
     sid = "Enable IAM User Permissions"
 
@@ -12,7 +14,7 @@ data "aws_iam_policy_document" "s3-kms-key" {
 
     principals {
         type = "AWS"
-        identifiers = ["arn:aws:iam::598014893957:root"]
+        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
     }
-    }
+  }
 }
