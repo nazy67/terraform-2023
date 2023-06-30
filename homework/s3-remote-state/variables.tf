@@ -1,5 +1,5 @@
 variable "bucket_name" {
-  default     = "akumore-remote-state-terraform-dev-june-2023"
+  default     = "akumo-terraform-state-2023-june"
   type        = string
   description = "bucket name"
 }

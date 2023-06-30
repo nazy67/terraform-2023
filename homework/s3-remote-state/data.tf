@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "state_policy_document" {
 
     principals {
         type = "AWS"
-        identifiers = ["arn:aws:iam::598014893957:role/test-user"]
+        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/test-user"]
     }
   }
 
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "state_policy_document" {
 
     principals {
         type = "AWS"
-        identifiers = ["arn:aws:iam::598014893957:role/test-user"]
+        identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/test-user"]
     }
   }
 }
