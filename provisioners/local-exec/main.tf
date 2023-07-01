@@ -10,6 +10,11 @@ resource "aws_instance" "local_exec_webserver" {
   }
 
   provisioner "local-exec" {
+    when    = destroy
+    command = "sleep 60"
+  }
+
+  provisioner "local-exec" {
     command = "echo ${self.public_ip} > local_exec_webserver_public_ip.txt"
   }
 }
