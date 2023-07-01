@@ -16,8 +16,14 @@ resource "aws_instance" "file_webserver" {
 
   provisioner "file" {
     content     = "ami used: ${self.ami}"
-    destination = "/tmp/file.log"
+    destination = "/tmp/ami.log"
   }
+
+  provisioner "file" {
+    content     = "public used: ${self.public_ip}"
+    destination = "/tmp/public.log"
+  }
+  
 
   connection {
     type = "ssh"
