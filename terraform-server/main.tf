@@ -5,7 +5,7 @@ resource "aws_instance" "terraform-instance" {
   user_data            = file("user_data.sh")
   iam_instance_profile = aws_iam_instance_profile.terraform-instance-profile.name
   tags = {
-    Name        = "${var.env}-terraform-server"
+    Name        = "${var.env}-tf-server"
     Environment = var.env
   }
   depends_on = [
