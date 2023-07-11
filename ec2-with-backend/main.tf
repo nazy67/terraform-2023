@@ -7,13 +7,19 @@ resource "aws_instance" "my-webserver" {
   tags = merge(
     local.common_tags,
     {
-      Name = "${var.env}_webserver"
+      Name = "${var.env}_webserver-${random_pet.random_name.id}"
     }
   )
 }
 
+resource "random_pet" "random_name" {
+  length    = 3
+  separator = "-"
+  prefix    = "wordpress"
+}
+
 resource "aws_security_group" "web-sg" {
-  name        = "webserver-sg"
+  name_prefix = "local.appname-web-sg"
   description = "this sg allowes port 22"
 
   ingress {

@@ -12,6 +12,6 @@ variable "env" {
 
 variable "key_name" {
   type        = string
-  default     = "local-key"
+  default     = "nazy-local-key"
   description = "key name"
 }
